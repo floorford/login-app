@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 
 import { createStackNavigator } from 'react-navigation';
 
-import Register from './screens/Register';
+import Register from './containers/Register';
 import Login from './screens/Login';
 import Home from './screens/Home';
 

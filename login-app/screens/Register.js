@@ -21,8 +21,15 @@ class Register extends Component {
   };
 
   handleSubmit(e) {
+    const { email, password } = this.state;
+
     e.preventDefault;
-    console.log('the value is ' + this.state.name + this.state.password + this.state.email);
+    this.props.onSubmit(email, password);
+    this.setState({
+      email: "",
+      password: ""
+    });
+    this.props.navigation.navigate('Login');
   };
 
   render() {
