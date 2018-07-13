@@ -18,3 +18,5 @@
 // });
 
 $this->post('register', 'Auth\RegisterController@register');
+$this->post('login', 'Auth\LoginController@login');
+$this->post('logout', 'Auth\LoginController@logout')->name('logout');
