@@ -39,13 +39,13 @@ class Login extends Controller
 
         // saving the update to the database
         $user[0]->save();
-        echo $user[0]['logged_in'];
+        return new UserResource($user[0]);
       }
       else
-        echo "Your password or email is incorrect, please try again";
+        return new UserResource($user[0]);
     }
     else
-      echo "Your password or email is incorrect, please try again";
+      return new UserResource($user[0]);
   }
 
   /**
@@ -65,7 +65,6 @@ class Login extends Controller
 
     // saving the update to the database
     $user[0]->save();
-    echo $user[0]['logged_in'];
 
     // return the updated version
     return new UserResource($user[0]);

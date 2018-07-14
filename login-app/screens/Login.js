@@ -9,16 +9,26 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      error: ""
     }
 
-    this.handleHome = this.handleHome.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
   }
 
-  handleHome() {
+  handleSubmit(e) {
     const { email, password } = this.state;
-    // check things match else bad
-    this.props.navigation.navigate('Home')
+
+    e.preventDefault();
+
+    this.props.onSubmit(email, password);
+    if (this.props.loggedIn === true) {
+      this.props.navigation.navigate('Home')
+    } else {
+      this.setState({
+        error: "Your email or password is incorrect, please try again"
+      });
+    }
   };
 
   handleRegister() {
@@ -26,7 +36,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, error } = this.state;
     const regExp = RegExp(/@/);
 
     // render logic for form validation
@@ -57,9 +67,9 @@ class Login extends Component {
 
           <View style={ styles.div }/>
 
-          <Button title="Login" style={ styles.text } onPress={ this.handleHome } disabled={ disabled }/>
+          <Button title="Login" style={ styles.text } onPress={ this.handleSubmit } disabled={ disabled }/>
           {/* if not recognised  */}
-          <FormValidationMessage>Email address or password not recognised</FormValidationMessage>
+          <FormValidationMessage>{ error }</FormValidationMessage>
           {/* else null */}
         </View>
       </View>

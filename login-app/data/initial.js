@@ -1,5 +1,6 @@
 const initial = {
-  user: [],
+  user: "",
+  loggedIn: false,
 }
 
 export default initial;

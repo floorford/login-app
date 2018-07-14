@@ -4,8 +4,8 @@ import { StatusBar } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import Register from './containers/Register';
-import Login from './screens/Login';
-import Home from './screens/Home';
+import Login from './containers/Login';
+import Home from './containers/Home';
 
 
 // ************* Status Bar Stuff ***************
