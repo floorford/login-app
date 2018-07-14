@@ -18,11 +18,18 @@ class Login extends Controller
   public function login(Request $request, RegisteredUser $user)
   {
     // get post request data for email and password
-    $inputEmail = $request->only("email");
+    $email = $request->only("email");
     $inputPass = $request->only("password");
 
+    // isolate the string value for the email array to sanitize it
+    $key2='email';
+    $strEmail = $email[$key2];
+
+    // clean the email of illegal characters
+    $cleanEmail = filter_var($strEmail, FILTER_SANITIZE_EMAIL);
+
     // $user is database object, checking the email exists in the database, and then if it does if the hashed password matches the input password
-    $user = RegisteredUser::where('email', '=', $inputEmail['email'])->get();
+    $user = RegisteredUser::where('email', '=', $cleanEmail)->get();
     if(count($user) > 0 && count($user) < 2)
     {
       if(Hash::check($inputPass['password'], $user[0]['password']))
@@ -47,15 +54,20 @@ class Login extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function logout(Request $request, User $user)
+  public function logout(Request $request, RegisteredUser $user)
   {
-    // get the request data - this is getting information from the app, about its login/logout status (true/false) and assigning it to the data variable
-    $data = $request->only(["logged_in"]);
+    $email = $request->only("email");
 
-    // taking that data (true/false) updating the user in the database
-    $user->fill($data)->save();
+    $user = RegisteredUser::where('email', '=', $email['email'])->get();
+
+    // changing logged_in from true to false
+    $user[0]['logged_in'] = false;
+
+    // saving the update to the database
+    $user[0]->save();
+    echo $user[0]['logged_in'];
 
     // return the updated version
-    return new UserResource($user);
+    return new UserResource($user[0]);
   }
 }
