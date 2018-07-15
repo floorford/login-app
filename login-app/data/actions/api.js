@@ -1,6 +1,6 @@
 import axios from "../axios";
 
-import { loginUser, logoutUser } from "./state.js";
+import { logUser } from "./state.js";
 
 export const postUser = (email, password) => dispatch => {
   axios.post("/register", {
@@ -17,14 +17,15 @@ export const postLoginUser = (email, password) => dispatch => {
     password: password
   }).then(({ data }) => {
     const user = data.data;
-    dispatch(loginUser(user));
+    dispatch(logUser(user));
   });
 };
 
-export const postLogoutUser = (email) => dispatch => {
+export const postLogoutUser = (user) => dispatch => {
   axios.post("/logout", {
-    email: email,
+    email: user,
   }).then(({ data }) => {
-    console.log(data)
+    const user = data.data;
+    dispatch(logUser(user));
   });
 };

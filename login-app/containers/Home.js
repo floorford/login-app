@@ -9,13 +9,12 @@ import { postLogoutUser } from "../data/actions/api";
 const mapStateToProps = state => {
   return {
     user: state.user,
-    loggedIn: state.loggedIn
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onClick: (email) => dispatch(postLogoutUser(email)),
+    onLogout: (user) => dispatch(postLogoutUser(user)),
   };
 };
 

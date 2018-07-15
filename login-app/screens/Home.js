@@ -5,27 +5,19 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.handleLogin =  this.handleLogin.bind(this);
-    this.handleRegister =  this.handleRegister.bind(this);
+    this.handleLogout =  this.handleLogout.bind(this);
   }
 
-  handleLogin() {
-    this.props.navigation.navigate('Login')
-  };
-
-  handleRegister() {
-    this.props.navigation.navigate('Register')
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.onLogout(this.props.user);
+    this.props.navigation.navigate('Login');
   };
 
   render () {
     return (
       <View style={ styles.container }>
-        {/* if not auth do this */}
-        <TouchableHighlight style={ styles.button} onPress={ this.handleRegister }>
-          <Text style={ styles.text }>Go to Register Page</Text>
-        </TouchableHighlight>
-        {/* else do this */}
-        <TouchableHighlight style={ styles.button} onPress={ this.handleRegister }>
+        <TouchableHighlight style={ styles.button} onPress={ this.handleLogout }>
           <Text style={ styles.text }>Logout</Text>
         </TouchableHighlight>
         <Text style={ styles.text }>Hello, you are logged in!</Text>

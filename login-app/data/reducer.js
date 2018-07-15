@@ -1,4 +1,4 @@
-const loginUser = (state, { user }) => {
+const logUser = (state, { user }) => {
   return {
     ...state,
     user: user.email,
@@ -6,19 +6,9 @@ const loginUser = (state, { user }) => {
   };
 };
 
-const logoutUser = (state, { player }) => {
-  return {
-    ...state,
-    user: email,
-    loggedIn: logged_in,
-  };
-};
-
-
 const reducer = (state, action) => {
   switch (action.type) {
-    case "loginUser": return loginUser(state, action);
-    case "logoutUser": return logoutUser(state, action);
+    case "logUser": return logUser(state, action);
     default: return state;
   }
 };

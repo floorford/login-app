@@ -20,10 +20,15 @@ class Login extends Component {
     const { email, password } = this.state;
 
     e.preventDefault();
-
+    console.log(this.props.loggedIn);
     this.props.onSubmit(email, password);
     if (this.props.loggedIn === true) {
-      this.props.navigation.navigate('Home')
+      this.setState({
+        email: "",
+        password: "",
+        error: ""
+      });
+      this.props.navigation.navigate('Home');
     } else {
       this.setState({
         error: "Your email or password is incorrect, please try again"
@@ -56,7 +61,7 @@ class Login extends Component {
 
         <View>
           <Text style={ styles.formLabel }>Email</Text>
-          <TextInput style={ styles.formText } textContentType="emailAddress" keyboardType="email-address" placeholder='someone@example.com' value={ email } onChangeText={ (email) => this.setState({ email: email }) }/>
+          <TextInput style={ styles.formText } textContentType="emailAddress" keyboardType="email-address" placeholder='someone@example.com' autoCapitalize="none" value={ email } onChangeText={ (email) => this.setState({ email: email }) }/>
           { emailErr ? <FormValidationMessage>Must provide a valid email</FormValidationMessage> : null }
 
           <View style={ styles.div }/>
