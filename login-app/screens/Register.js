@@ -44,25 +44,25 @@ class Register extends Component {
 
     return (
       <View style={ styles.container }>
-        <Text style={ [styles.text, {color: 'black'}] }>Already registered?</Text>
-        <TouchableHighlight style={ styles.button } onPress={ this.handleLogin }>
-          <Text style={ styles.text }>Go to Login Page</Text>
+        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Already registered?</Text>
+        <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleLogin }>
+          <Text style={ styles.text }>Login</Text>
         </TouchableHighlight>
 
-        <View>
-          <Text style={ styles.formLabel }>Email</Text>
+        <View style={ styles.form }>
+          <Text style={ styles.formLabel }>Email:</Text>
           <TextInput style={ styles.formText } textContentType="emailAddress" keyboardType="email-address" placeholder='someone@example.com' autoCapitalize="none" value={ email } onChangeText={ (email) => this.setState({ email: email }) }/>
           { emailErr ? <FormValidationMessage>Must provide a valid email</FormValidationMessage> : null }
 
           <View style={ styles.div }/>
 
-          <Text style={ styles.formLabel }>Password</Text>
+          <Text style={ styles.formLabel }>Password:</Text>
           <TextInput style={ styles.formText } placeholder='Enter a password here...' textContentType="password" value={ password }  password={ true } secureTextEntry={ true } onChangeText={ (password) => this.setState({ password: password }) }/>
           { passwordErr ? <FormValidationMessage>Password must be between 1 and 20 characters</FormValidationMessage> : null }
 
           <View style={ styles.div }/>
 
-          <Button title="Submit" style={ styles.text } onPress={ this.handleSubmit } disabled={ disabled }/>
+          <Button title="Submit" color="#47A5D4" onPress={ this.handleSubmit } disabled={ disabled }/>
         </View>
       </View>
     )
@@ -76,10 +76,14 @@ Register.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    alignItems: 'center',
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#47A5D4',
+    width: 40 + "%",
+    borderRadius: 10,
+    marginTop: 5
   },
   text: {
     fontSize: 19,
@@ -92,10 +96,14 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginLeft: 20,
     fontSize: 22,
+    color: '#6A8E9F',
   },
   formText: {
     marginLeft: 20,
     fontSize: 19,
+  },
+  form: {
+    width: 96 + "%"
   },
   div: {
     marginBottom: 10

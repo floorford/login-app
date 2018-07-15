@@ -52,14 +52,14 @@ class Login extends Component {
 
     return (
       <View style={ styles.container }>
-        <Text style={ [styles.text, {color: 'black'}] }>Not a member?</Text>
-        <TouchableHighlight style={ styles.button } onPress={ this.handleRegister }>
-          <Text style={ styles.text }>Go to Register Page</Text>
+        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Not a member?</Text>
+        <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleRegister }>
+          <Text style={ styles.text }>Register</Text>
         </TouchableHighlight>
 
         <View style={ styles.div }/>
 
-        <View>
+        <View style={ styles.form }>
           <Text style={ styles.formLabel }>Email</Text>
           <TextInput style={ styles.formText } textContentType="emailAddress" keyboardType="email-address" placeholder='someone@example.com' autoCapitalize="none" value={ email } onChangeText={ (email) => this.setState({ email: email }) }/>
           { emailErr ? <FormValidationMessage>Must provide a valid email</FormValidationMessage> : null }
@@ -72,7 +72,7 @@ class Login extends Component {
 
           <View style={ styles.div }/>
 
-          <Button title="Login" style={ styles.text } onPress={ this.handleSubmit } disabled={ disabled }/>
+          <Button title="Login" color="#47A5D4" onPress={ this.handleSubmit } disabled={ disabled }/>
           {/* if not recognised  */}
           <FormValidationMessage>{ error }</FormValidationMessage>
           {/* else null */}
@@ -89,10 +89,14 @@ Login.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    alignItems: 'center',
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#47A5D4',
+    width: 40 + "%",
+    borderRadius: 10,
+    marginTop: 5
   },
   text: {
     fontSize: 19,
@@ -105,10 +109,14 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginLeft: 20,
     fontSize: 22,
+    color: '#6A8E9F',
   },
   formText: {
     marginLeft: 20,
     fontSize: 19,
+  },
+  form: {
+    width: 96 + "%"
   },
   div: {
     marginBottom: 10

@@ -17,10 +17,10 @@ class Home extends Component {
   render () {
     return (
       <View style={ styles.container }>
-        <TouchableHighlight style={ styles.button} onPress={ this.handleLogout }>
+        <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleLogout }>
           <Text style={ styles.text }>Logout</Text>
         </TouchableHighlight>
-        <Text style={ styles.text }>Hello, you are logged in!</Text>
+        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Hello, you are logged in!</Text>
       </View>
     )
   }
@@ -33,29 +33,21 @@ Home.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'pink'
+    backgroundColor: 'white',
+    alignItems: 'center',
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#47A5D4',
+    width: 40 + "%",
+    borderRadius: 10,
+    marginTop: 5
   },
   text: {
     fontSize: 19,
     color: 'white',
     textAlign: 'center',
     padding: 5,
-  },
-  formLabel: {
-    marginTop: 10,
-    marginBottom: 5,
-    marginLeft: 20,
-    fontSize: 22,
-  },
-  formText: {
-    marginLeft: 20,
-    fontSize: 19,
-  },
-  div: {
-    marginBottom: 10
+    color: '#6A8E9F',
   }
 });
 
