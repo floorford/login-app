@@ -31,7 +31,7 @@ class Login extends Controller
 
     // $user is database object, checking the email exists in the database, and then if it does if the hashed password matches the input password
     $user = RegisteredUser::where('email', '=', $cleanEmail)->get();
-    if(count($user) > 0 && count($user) < 2)
+    if(count($user) > 0)
     {
       if(Hash::check($inputPass['password'], $user[0]['password']))
       {

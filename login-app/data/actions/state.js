@@ -4,3 +4,10 @@ export const logUser = (user) => {
     user: user
   };
 };
+
+export const userExists = (error) => {
+  return {
+    type: "userExists",
+    error: error
+  };
+};

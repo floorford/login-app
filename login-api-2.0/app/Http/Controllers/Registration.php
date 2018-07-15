@@ -34,15 +34,24 @@ class Registration extends Controller
     // clean the email of illegal characters
     $cleanEmail = filter_var($strEmail, FILTER_SANITIZE_EMAIL);
 
-    // re-assign the data into the format required from the database
-    $data = ["email" => $cleanEmail, "password" => $hashedPassword];
+    $user = RegisteredUser::where('email', '=', $cleanEmail)->get();
+    if(count($user) > 0)
+    {
+      return "You already have an account with us, please login by clicking on the button below";
+    }
+    else {
+      // re-assign the data into the format required from the database
+      $data = ["email" => $cleanEmail, "password" => $hashedPassword];
 
-    // create registered_user with data and store in DB
-    $registered_user = RegisteredUser::create($data);
 
-    // return the resource
-    // automatically uses the right status code
-    return new UserResource($registered_user);
+      // create registered_user with data and store in DB
+      $registered_user = RegisteredUser::create($data);
+
+      // return the resource
+      // automatically uses the right status code
+      new UserResource($registered_user); //got rid of return
+      return "Congratulations you're now registered! Please login by clicking on the button below";
+    }
   }
 
   /**

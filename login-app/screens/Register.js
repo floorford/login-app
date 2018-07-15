@@ -17,29 +17,27 @@ class Register extends Component {
 
 
   handleLogin() {
-    this.props.navigation.navigate('Login')
+    this.props.navigation.navigate('Login');
+    this.setState({
+      email: "",
+      password: ""
+    });
   };
 
   handleSubmit(e) {
     const { email, password } = this.state;
 
-    e.preventDefault;
     this.props.onSubmit(email, password);
-    this.setState({
-      email: "",
-      password: ""
-    });
-    this.props.navigation.navigate('Login');
   };
 
   render() {
     const { email, password } = this.state;
+    const { error } = this.props;
     const regExp = RegExp(/@/);
 
     // render logic for form validation
     let emailErr = (!regExp.test(email)) ? true : false;
     let passwordErr = password.length < 1 || password.length > 20 ? true : false;
-
     let disabled = (passwordErr || emailErr) ? true : false;
 
     return (
@@ -58,8 +56,9 @@ class Register extends Component {
           <View style={ styles.div }/>
 
           <Button title="Submit" color="#47A5D4" onPress={ this.handleSubmit } disabled={ disabled }/>
+          <Text style={ [styles.text, {color: '#6A8E9F'}] }>{ error }</Text>
         </View>
-        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Already registered?</Text>
+        <Text style={ [styles.text, {color: '#6A8E9F', marginTop: 20}] }>Already registered?</Text>
         <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleLogin }>
           <Text style={ styles.text }>Login</Text>
         </TouchableHighlight>
