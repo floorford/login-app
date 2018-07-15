@@ -6,9 +6,7 @@ export const postUser = (email, password) => dispatch => {
   axios.post("/register", {
     email: email,
     password: password
-  }).then(({ data }) => {
-    console.log(data.data)
-  });
+  })
 };
 
 export const postLoginUser = (email, password) => dispatch => {

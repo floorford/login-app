@@ -48,7 +48,7 @@ class Login extends Component {
         password: "",
         error: ""
       });
-    } else if (nextProps.loggedIn === false){
+    } else if (nextProps.loggedIn === false && this.state.password.length > 1){
       this.setState({
         error: "Your email or password is incorrect, please try again"
       });
@@ -67,23 +67,16 @@ class Login extends Component {
 
     return (
       <View style={ styles.container }>
-        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Not a member?</Text>
-        <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleRegister }>
-          <Text style={ styles.text }>Register</Text>
-        </TouchableHighlight>
-
-        <View style={ styles.div }/>
-
         <View style={ styles.form }>
           <Text style={ styles.formLabel }>Email</Text>
           <TextInput style={ styles.formText } textContentType="emailAddress" keyboardType="email-address" placeholder='someone@example.com' autoCapitalize="none" value={ email } onChangeText={ (email) => this.setState({ email: email }) }/>
-          { emailErr ? <FormValidationMessage>Must provide a valid email</FormValidationMessage> : null }
+          { emailErr ? <FormValidationMessage>Please enter your email</FormValidationMessage> : null }
 
           <View style={ styles.div }/>
 
           <Text style={ styles.formLabel }>Password</Text>
           <TextInput style={ styles.formText } placeholder='Enter a password here...' textContentType="password" value={ password }  password={ true } secureTextEntry={ true } onChangeText={ (password) => this.setState({ password: password }) }/>
-          { passwordErr && !this.props.loggedIn ? <FormValidationMessage>Password must be between 1 and 20 characters</FormValidationMessage> : null }
+          { passwordErr && !this.props.loggedIn ? <FormValidationMessage>Please enter a password</FormValidationMessage> : null }
 
           <View style={ styles.div }/>
 
@@ -91,8 +84,17 @@ class Login extends Component {
 
           <FormValidationMessage>{ error }</FormValidationMessage>
         </View>
+
         <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleHome }>
           <Text style={ styles.text }>Home</Text>
+        </TouchableHighlight>
+
+        <View style={ styles.div }/>
+        <View style={ styles.div }/>
+
+        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Not a member?</Text>
+        <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleRegister }>
+          <Text style={ styles.text }>Register</Text>
         </TouchableHighlight>
       </View>
     )

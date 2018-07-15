@@ -17,10 +17,10 @@ class Home extends Component {
   render () {
     return (
       <View style={ styles.container }>
+        <Text style={ [styles.text, {color: '#6A8E9F', marginTop: 20}] }>Hello, you are logged in!</Text>
         <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleLogout }>
           <Text style={ styles.text }>Logout</Text>
         </TouchableHighlight>
-        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Hello, you are logged in!</Text>
       </View>
     )
   }

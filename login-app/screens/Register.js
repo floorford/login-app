@@ -44,11 +44,6 @@ class Register extends Component {
 
     return (
       <View style={ styles.container }>
-        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Already registered?</Text>
-        <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleLogin }>
-          <Text style={ styles.text }>Login</Text>
-        </TouchableHighlight>
-
         <View style={ styles.form }>
           <Text style={ styles.formLabel }>Email:</Text>
           <TextInput style={ styles.formText } textContentType="emailAddress" keyboardType="email-address" placeholder='someone@example.com' autoCapitalize="none" value={ email } onChangeText={ (email) => this.setState({ email: email }) }/>
@@ -64,6 +59,10 @@ class Register extends Component {
 
           <Button title="Submit" color="#47A5D4" onPress={ this.handleSubmit } disabled={ disabled }/>
         </View>
+        <Text style={ [styles.text, {color: '#6A8E9F'}] }>Already registered?</Text>
+        <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleLogin }>
+          <Text style={ styles.text }>Login</Text>
+        </TouchableHighlight>
       </View>
     )
   }
