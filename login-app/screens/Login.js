@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, TextInput, View, TouchableHighlight, Button } from "react-native";
 import { FormValidationMessage } from 'react-native-elements'
-import { Ionicons } from '@expo/vector-icons';
 
 class Login extends Component {
   constructor(props) {
