@@ -1,6 +1,6 @@
 const initial = {
   user: "",
-  loggedIn: false,
+  loggedIn: null,
 }
 
 export default initial;

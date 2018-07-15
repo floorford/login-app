@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\RegisteredUser;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\ErrorResource;
 use Illuminate\Support\Facades\Hash;
 
 class Login extends Controller
@@ -42,10 +43,10 @@ class Login extends Controller
         return new UserResource($user[0]);
       }
       else
-        return new UserResource($user[0]);
+        return new ErrorResource($user);
     }
     else
-      return new UserResource($user[0]);
+      return new ErrorResource($user);
   }
 
   /**

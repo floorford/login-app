@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class ErrorResource extends JsonResource
 {
   /**
    * Transform the resource into an array.
@@ -17,8 +17,8 @@ class UserResource extends JsonResource
     // just show the email, password, and logged_in properties
     // $this represents the current user
     return [
-      "email" => $this->email,
-      "logged_in" => $this->logged_in,
+      "email" => "",
+      "logged_in" => false
     ];
   }
 }

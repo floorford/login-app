@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, TextInput, View, TouchableHighlight, Button } from "react-native";
 import { FormValidationMessage } from 'react-native-elements'
+import { Ionicons } from '@expo/vector-icons';
 
 class Login extends Component {
   constructor(props) {
@@ -9,36 +10,50 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      error: ""
+      error: "",
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
+    this.handleHome = this.handleHome.bind(this);
   }
 
   handleSubmit(e) {
     const { email, password } = this.state;
 
-    e.preventDefault();
-    console.log(this.props.loggedIn);
     this.props.onSubmit(email, password);
+  };
+
+  handleRegister() {
+    this.props.navigation.navigate('Register');
+  };
+
+  handleHome() {
     if (this.props.loggedIn === true) {
+      this.props.navigation.navigate('Home');
       this.setState({
-        email: "",
-        password: "",
         error: ""
       });
-      this.props.navigation.navigate('Home');
     } else {
       this.setState({
-        error: "Your email or password is incorrect, please try again"
+        error: "You must login to continue"
       });
     }
   };
 
-  handleRegister() {
-    this.props.navigation.navigate('Register')
-  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loggedIn) {
+      this.props.navigation.navigate('Home');
+      this.setState({
+        password: "",
+        error: ""
+      });
+    } else if (nextProps.loggedIn === false){
+      this.setState({
+        error: "Your email or password is incorrect, please try again"
+      });
+    }
+  }
 
   render() {
     const { email, password, error } = this.state;
@@ -68,22 +83,24 @@ class Login extends Component {
 
           <Text style={ styles.formLabel }>Password</Text>
           <TextInput style={ styles.formText } placeholder='Enter a password here...' textContentType="password" value={ password }  password={ true } secureTextEntry={ true } onChangeText={ (password) => this.setState({ password: password }) }/>
-          { passwordErr ? <FormValidationMessage>Password must be between 1 and 20 characters</FormValidationMessage> : null }
+          { passwordErr && !this.props.loggedIn ? <FormValidationMessage>Password must be between 1 and 20 characters</FormValidationMessage> : null }
 
           <View style={ styles.div }/>
 
           <Button title="Login" color="#47A5D4" onPress={ this.handleSubmit } disabled={ disabled }/>
-          {/* if not recognised  */}
+
           <FormValidationMessage>{ error }</FormValidationMessage>
-          {/* else null */}
         </View>
+        <TouchableHighlight style={ styles.button } underlayColor="#4EA0C9" onPress={ this.handleHome }>
+          <Text style={ styles.text }>Home</Text>
+        </TouchableHighlight>
       </View>
     )
   }
 };
 
 Login.navigationOptions = {
-  title: 'Login'
+  title: 'Login',
 };
 
 const styles = StyleSheet.create({
